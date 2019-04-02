@@ -114,26 +114,26 @@
             </plugin>
 
             <!-- Minimum maven version -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-enforcer-plugin</artifactId>
-                <version>${maven-enforcer-plugin.version}</version>
-                <executions>
-                    <execution>
-                        <id>enforce-maven</id>
-                        <goals>
-                            <goal>enforce</goal>
-                        </goals>
-                        <configuration>
-                            <rules>
-                                <requireMavenVersion>
-                                    <version>3.5.4</version>
-                                </requireMavenVersion>
-                            </rules>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
+            <!--<plugin>-->
+            <!--<groupId>org.apache.maven.plugins</groupId>-->
+            <!--<artifactId>maven-enforcer-plugin</artifactId>-->
+            <!--<version>${maven-enforcer-plugin.version}</version>-->
+            <!--<executions>-->
+            <!--<execution>-->
+            <!--<id>enforce-maven</id>-->
+            <!--<goals>-->
+            <!--<goal>enforce</goal>-->
+            <!--</goals>-->
+            <!--<configuration>-->
+            <!--<rules>-->
+            <!--<requireMavenVersion>-->
+            <!--<version>3.5.4</version>-->
+            <!--</requireMavenVersion>-->
+            <!--</rules>-->
+            <!--</configuration>-->
+            <!--</execution>-->
+            <!--</executions>-->
+            <!--</plugin>-->
 
             <!-- SUREFIRE (compatible with JUnit 5+, Java 9+, Lombok) -->
             <plugin>
@@ -162,8 +162,44 @@
                 </configuration>
             </plugin>
 
+            <plugin>
+                <groupId>com.github.spotbugs</groupId>
+                <artifactId>spotbugs-maven-plugin</artifactId>
+                <version>3.1.11</version>
+                <dependencies>
+                    <!-- overwrite dependency on spotbugs if you want to specify the version of spotbugs -->
+                    <dependency>
+                        <groupId>com.github.spotbugs</groupId>
+                        <artifactId>spotbugs</artifactId>
+                        <version>4.0.0-beta1</version>
+                    </dependency>
+                </dependencies>
+            </plugin>
+
         </plugins>
 
     </build>
+
+    <repositories>
+        <repository>
+            <id>some.rep</id>
+            <url>https://mvnrepository.com/artifact/com.github.spotbugs</url>
+        </repository>
+
+    </repositories>
+    <reporting>
+        <plugins>
+            <plugin>
+                <groupId>com.github.spotbugs</groupId>
+                <artifactId>spotbugs-maven-plugin</artifactId>
+                <version>3.1.11</version>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-pmd-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </reporting>
 
 </project>
