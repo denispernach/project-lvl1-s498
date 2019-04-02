@@ -9,6 +9,9 @@ compile: clean
 
 clean:
 	rm -rf ./target
+update:
+	./mvnw versions:update-properties
+	./mvnw versions:display-plugin-updates
 
 build-run: build run
 
