@@ -74,7 +74,7 @@
                     <archive>
                         <manifest>
                             <!--<mainClass>io.hexlet.boilerplate.HelloWorld</mainClass>-->
-                            <mainClass>games.Slot</mainClass>
+                            <mainClass>games.Choice</mainClass>
                         </manifest>
                     </archive>
                     <descriptorRefs>
