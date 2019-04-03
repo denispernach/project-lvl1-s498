@@ -20,8 +20,7 @@ public class Drunkard {
         dealCards(deck);
         int count = 0;
         while(true){
-            if(playerCardsIsEmpty(0)) break;
-            if(playerCardsIsEmpty(1)) break;
+            if(playerCardsIsEmpty(0) || playerCardsIsEmpty(1)) break;
             count ++;
             int card1 = getCard(0);
             int card2 = getCard(1);
