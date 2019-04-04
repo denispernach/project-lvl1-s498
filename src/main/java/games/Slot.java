@@ -21,11 +21,6 @@ public class Slot {
                     ", второй - " + secondCounter +
                     ", третий - " + thirdCounter);
             if (firstCounter == secondCounter && firstCounter == thirdCounter) {
-                status = true;
-            } else {
-                status = false;
-            }
-            if (status) {
                 money += 1_000;
                 System.out.println("Выигрышь - 1 000 $, Ваш капитал теперь составляет: " + money + "$");
             } else {
