@@ -3,9 +3,6 @@ package games;
 
 import org.apache.commons.math3.util.MathArrays;
 
-import java.lang.reflect.Array;
-import java.util.Arrays;
-
 public class Drunkard {
 
     private static final int PARS_TOTAL_COUNT = Par.values().length;
@@ -18,6 +15,52 @@ public class Drunkard {
     public static void main(String[] args) {
         int[] deck = initDeck();
         dealCards(deck);
+        game();
+        if(firstWin){
+            System.out.println("выиграл первый");
+        } else {
+            System.out.println("Выиграл второй");
+        }
+    }
+
+    private static int[] initDeck(){
+        int[] cards = new int[CARDS_TOTAL_COUNT];
+        for (int i = 0; i < CARDS_TOTAL_COUNT; i++) {
+            cards[i] = i;
+        }
+        MathArrays.shuffle(cards);
+        return cards;
+    }
+
+    private static void dealCards(int[] deck){
+        int half = CARDS_TOTAL_COUNT/2;
+        for (int i = 0; i <half ; i++) {
+            playersCards[0][i] = deck[i];
+            playersCards[1][i] = deck[half + i];
+        }
+        playersCardTails[0] = 0;
+        playersCardTails[1] = 0;
+        playersCardHeads[0] = half;
+        playersCardHeads[1] = half;
+    }
+
+    private static int getCard(int player){
+        int card = playersCards[player][playersCardTails[player]];
+        playersCardTails[player] = incrementIndex(playersCardTails[player]);
+        return card;
+    }
+
+    private static void addCard(int player, int card){
+        playersCards[player][playersCardHeads[player]] = card;
+        playersCardHeads[player] = incrementIndex(playersCardHeads[player]);
+    }
+
+
+    private static int incrementIndex(int i) {
+        return (i + 1) % CARDS_TOTAL_COUNT;
+    }
+
+    private static void game(){
         int count = 0;
         while(true){
             if(playerCardsIsEmpty(0) || playerCardsIsEmpty(1)) break;
@@ -46,54 +89,11 @@ public class Drunkard {
             }
             draw(card1, card2);
         }
-        if(firstWin){
-            System.out.println("выиграл первый");
-        } else {
-            System.out.println("Выиграл второй");
-        }
-    }
-
-    private static int[] initDeck(){
-        int[] cards = new int[CARDS_TOTAL_COUNT];
-        for (int i = 0; i < CARDS_TOTAL_COUNT; i++) {
-            cards[i] = i;
-        }
-        MathArrays.shuffle(cards);
-        return cards;
-    }
-
-    private static void dealCards(int[] deck){
-        int half = CARDS_TOTAL_COUNT/2;
-        for (int i = 0; i <half ; i++) {
-            playersCards[0][i] = deck[i];
-            playersCards[1][i] = deck[half + i];
-        }
-        playersCardTails[0] = 0;
-        playersCardTails[1] = 0;
-        playersCardHeads[0] = 18;
-        playersCardHeads[1] = 18;
-    }
-
-    private static int getCard(int player){
-        int card = playersCards[player][playersCardTails[player]];
-        playersCardTails[player] = incrementIndex(playersCardTails[player]);
-        return card;
-    }
-
-    private static void addCard(int player, int card){
-        playersCards[player][playersCardHeads[player]] = card;
-        playersCardHeads[player] = incrementIndex(playersCardHeads[player]);
-    }
-
-
-    private static int incrementIndex(int i) {
-        return (i + 1) % CARDS_TOTAL_COUNT;
     }
 
     private static boolean playerCardsIsEmpty(int player) {
         int tail = playersCardTails[player];
         int head = playersCardHeads[player];
-
         return tail == head;
     }
 
@@ -108,15 +108,12 @@ public class Drunkard {
             addCard(1, card1);
             addCard(1, card2);
         }
-
-
     }
 
     private static void draw(int card1, int card2){
         System.out.println("Спор - каждый остаётся при своих!");
         addCard(0, card1);
         addCard(1, card2);
-
     }
 
     private static Suit getSuit(int cardNumber) {
