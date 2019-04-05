@@ -1,7 +1,7 @@
 package games;
 
 
-import org.apache.commons.math3.util.MathArrays;
+import org.slf4j.Logger;
 
 public class Drunkard {
 
@@ -9,15 +9,16 @@ public class Drunkard {
     private static int[] playersCardTails = new int[2];
     private static int[] playersCardHeads = new int[2];
     private static boolean firstWin;
+    private static final Logger log = org.slf4j.LoggerFactory.getLogger(Drunkard.class);
 
     public static void main(String[] args) {
         int[] deck = CardUtils.initDeck();
         dealCards(deck);
         game();
         if(firstWin){
-            System.out.println("The first player won the game");
+            log.info("The first player won the game");
         } else {
-            System.out.println("The second player won the game");
+            log.info("The second player won the game");
         }
     }
 
@@ -58,7 +59,7 @@ public class Drunkard {
             count ++;
             int card1 = getCard(0);
             int card2 = getCard(1);
-            System.out.println("Iteration No" + count + " player No1 card: " + CardUtils.toString(card1) +
+            log.info("Iteration No" + count + " player No1 card: " + CardUtils.toString(card1) +
                     " player No2 card: " + CardUtils.toString(card2));
             int ignoreSuitCard1 = card1 % CardUtils.PARS_TOTAL_COUNT;
             int ignoreSuitCard2 = card2 % CardUtils.PARS_TOTAL_COUNT;
@@ -91,18 +92,18 @@ public class Drunkard {
     private static void currentWin(boolean firstWin, int card1, int card2){
         Drunkard.firstWin = firstWin;
         if(firstWin){
-            System.out.println("The first player won!");
+            log.info("The first player won!");
             addCard(0, card1);
             addCard(0, card2);
         } else {
-            System.out.println("The second player won!");
+            log.info("The second player won!");
             addCard(1, card1);
             addCard(1, card2);
         }
     }
 
     private static void draw(int card1, int card2){
-        System.out.println("draw!");
+        log.info("draw!");
         addCard(0, card1);
         addCard(1, card2);
     }

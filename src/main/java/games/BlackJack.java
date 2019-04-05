@@ -1,8 +1,13 @@
 package games;
 
+import org.slf4j.Logger;
+
 import java.io.IOException;
 
 public class BlackJack {
+
+    private static final Logger log = org.slf4j.LoggerFactory.getLogger(BlackJack.class);
+
     private static int[] cards; // Основная колода
     private static int cursor; // Счётчик карт основной колоды
     private static int[][] playersCards; // карты игроков. Первый индекс - номер игрока
@@ -22,13 +27,13 @@ public class BlackJack {
             showCurrentResult();
         }
         if (playersMoney[0] > 0)
-            System.out.println("You win! Congratulations!");
+            log.info("You win! Congratulations!");
         else
-            System.out.println("You loose. Don't play again...");
+            log.info("You loose. Don't play again...");
     }
 
     private static void initRound() {
-        System.out.println("\nYou have " + playersMoney[0] + "$, computer have - " + playersMoney[1] + "$. Let's go!");
+        log.info("\nYou have " + playersMoney[0] + "$, computer have - " + playersMoney[1] + "$. Let's go!");
         cards = CardUtils.initDeck();
         playersCards = new int[2][MAX_CARDS_COUNT];
         playersCursors = new int[]{0, 0};
@@ -44,7 +49,7 @@ public class BlackJack {
                 addCardToPlayerUI(0);
             }
         } else {
-            while (sum(1) < MAX_VALUE_FOR_COMP_DECISION){
+            while (sum(1) < MAX_VALUE_FOR_COMP_DECISION) {
                 addCardToPlayerUI(1);
             }
         }
@@ -53,7 +58,7 @@ public class BlackJack {
 
     private static void addCardToPlayerUI(int player) {
         String msg = player == 0 ? "you get - " : "comp get - ";
-        System.out.println(msg + CardUtils.toString(addCardToPlayer(player)));
+        log.info(msg + CardUtils.toString(addCardToPlayer(player)));
     }
 
     private static int addCardToPlayer(int player) {
@@ -69,24 +74,24 @@ public class BlackJack {
         return sum;
     }
 
-    private static void showCurrentResult(){
-        int playerSum =  getFinalSum(0);
+    private static void showCurrentResult() {
+        int playerSum = getFinalSum(0);
         int compSum = getFinalSum(1);
-        System.out.println("Your scores equals - " + playerSum +
+        log.info("Your scores equals - " + playerSum +
                 ", comp scores equals - " + compSum);
-        if(playerSum > compSum) {
-            System.out.println("You win current round! And win " + BET + "$");
+        if (playerSum > compSum) {
+            log.info("You win current round! And win " + BET + "$");
             playersMoney[0] += BET;
             playersMoney[1] -= BET;
             return;
         }
-        if(playerSum < compSum){
-            System.out.println("You loose current round! And loose " + BET + "$");
+        if (playerSum < compSum) {
+            log.info("You loose current round! And loose " + BET + "$");
             playersMoney[0] -= BET;
             playersMoney[1] += BET;
             return;
         }
-        System.out.println("It's draw");
+        log.info("It's draw");
     }
 
     private static int getFinalSum(int player) {
@@ -95,7 +100,7 @@ public class BlackJack {
     }
 
     static boolean confirm(String message) throws IOException {
-        System.out.println(message + " \"Y\" - Yes, {any another key} - no (to stop the game, press Ctrl + C)");
+        log.info(message + " \"Y\" - Yes, {any another key} - no (to stop the game, press Ctrl + C)");
         switch (Choice.getCharacterFromUser()) {
             case 'Y':
             case 'y':

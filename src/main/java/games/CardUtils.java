@@ -6,7 +6,7 @@ public class CardUtils {
     static final int PARS_TOTAL_COUNT = Par.values().length;
     static final int CARDS_TOTAL_COUNT = PARS_TOTAL_COUNT * Suit.values().length;
 
-    static int[] initDeck(){
+    static int[] initDeck() {
         int[] cards = new int[CARDS_TOTAL_COUNT];
         for (int i = 0; i < CARDS_TOTAL_COUNT; i++) {
             cards[i] = i;
