@@ -17,9 +17,9 @@ public class Drunkard {
         dealCards(deck);
         game();
         if(firstWin){
-            System.out.println("выиграл первый");
+            System.out.println("The first player won the game");
         } else {
-            System.out.println("Выиграл второй");
+            System.out.println("The second player won the game");
         }
     }
 
@@ -67,8 +67,8 @@ public class Drunkard {
             count ++;
             int card1 = getCard(0);
             int card2 = getCard(1);
-            System.out.println("Итерация №" + count + " Игрок №1 карта: " + toString(card1) +
-                    " Игрок №2 карта: " + toString(card2));
+            System.out.println("Iteration No" + count + " player No1 card: " + toString(card1) +
+                    " player No2 card: " + toString(card2));
             int ignoreSuitCard1 = card1 % PARS_TOTAL_COUNT;
             int ignoreSuitCard2 = card2 % PARS_TOTAL_COUNT;
             if(ignoreSuitCard1 == 0 && ignoreSuitCard2 == 8){
@@ -100,18 +100,18 @@ public class Drunkard {
     private static void currentWin(boolean firstWin, int card1, int card2){
         Drunkard.firstWin = firstWin;
         if(firstWin){
-            System.out.println("Выиграл игрок 1!");
+            System.out.println("The first player won!");
             addCard(0, card1);
             addCard(0, card2);
         } else {
-            System.out.println("Выиграл игрок 2!");
+            System.out.println("The second player won!");
             addCard(1, card1);
             addCard(1, card2);
         }
     }
 
     private static void draw(int card1, int card2){
-        System.out.println("Спор - каждый остаётся при своих!");
+        System.out.println("draw!");
         addCard(0, card1);
         addCard(1, card2);
     }

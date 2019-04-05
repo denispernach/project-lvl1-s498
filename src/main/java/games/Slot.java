@@ -1,10 +1,10 @@
 package games;
 
 public class Slot {
+    private static int money = 100;
+    private static int bet = 10;
 
     public static void main(String[] args) {
-        int money = 100;
-        int bet = 10;
         int firstCounter = 0;
         int secondCounter = 0;
         int thirdCounter = 0;
@@ -12,20 +12,20 @@ public class Slot {
         boolean status;
 
         while (money >= bet) {
-            System.out.println("У Вас " + money + "$, ставка - " + bet + "$");
+            System.out.println("You have " + money + "$, the bet is - " + bet + "$");
             firstCounter = (firstCounter + (int) Math.round(Math.random() * 100)) % size;
             secondCounter = (secondCounter + (int) Math.round(Math.random() * 100)) % size;
             thirdCounter = (thirdCounter + (int) Math.round(Math.random() * 100)) % size;
-            System.out.println("Крутим барабаны! Розыгрыш принёс следующие результаты: ");
-            System.out.println("первый барабан - " + firstCounter +
-                    ", второй - " + secondCounter +
-                    ", третий - " + thirdCounter);
+            System.out.println("Let's do it! And we have the following results: ");
+            System.out.println("The first number is - " + firstCounter +
+                    ", the second - " + secondCounter +
+                    ", and the third - " + thirdCounter);
             if (firstCounter == secondCounter && firstCounter == thirdCounter) {
                 money += 1_000;
-                System.out.println("Выигрышь - 1 000 $, Ваш капитал теперь составляет: " + money + "$");
+                System.out.println("you get - 1 000 $, and your money is: " + money + "$ now");
             } else {
                 money -= bet;
-                System.out.println("Проигрыш " + bet + "$, ваш капитал теперь составляет: " + money + "$");
+                System.out.println("you loose " + bet + "$, and your money is: " + money + "$ now");
             }
 
         }
