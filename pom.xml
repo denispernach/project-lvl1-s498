@@ -17,7 +17,7 @@
         <log4j-slf4j-impl.version>2.11.2</log4j-slf4j-impl.version>
         <apache-commons-math.version>3.6.1</apache-commons-math.version>
         <maven-compiler-plugin.version>3.8.0</maven-compiler-plugin.version>
-        <maven.compiler.release>11</maven.compiler.release>
+        <maven.compiler.release>12</maven.compiler.release>
         <maven.compiler.parameters>true</maven.compiler.parameters>
         <maven-assembly-plugin.version>3.1.1</maven-assembly-plugin.version>
         <jacoco-maven-plugin.version>0.8.3</jacoco-maven-plugin.version>
