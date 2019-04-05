@@ -5,15 +5,13 @@ import org.apache.commons.math3.util.MathArrays;
 
 public class Drunkard {
 
-    private static final int PARS_TOTAL_COUNT = Par.values().length;
-    private static final int CARDS_TOTAL_COUNT = PARS_TOTAL_COUNT * Suit.values().length;
-    private static int[][] playersCards = new int[2][CARDS_TOTAL_COUNT];
+    private static int[][] playersCards = new int[2][CardUtils.CARDS_TOTAL_COUNT];
     private static int[] playersCardTails = new int[2];
     private static int[] playersCardHeads = new int[2];
     private static boolean firstWin;
 
     public static void main(String[] args) {
-        int[] deck = initDeck();
+        int[] deck = CardUtils.initDeck();
         dealCards(deck);
         game();
         if(firstWin){
@@ -23,17 +21,10 @@ public class Drunkard {
         }
     }
 
-    private static int[] initDeck(){
-        int[] cards = new int[CARDS_TOTAL_COUNT];
-        for (int i = 0; i < CARDS_TOTAL_COUNT; i++) {
-            cards[i] = i;
-        }
-        MathArrays.shuffle(cards);
-        return cards;
-    }
+
 
     private static void dealCards(int[] deck){
-        int half = CARDS_TOTAL_COUNT/2;
+        int half = CardUtils.CARDS_TOTAL_COUNT/2;
         for (int i = 0; i <half ; i++) {
             playersCards[0][i] = deck[i];
             playersCards[1][i] = deck[half + i];
@@ -57,7 +48,7 @@ public class Drunkard {
 
 
     private static int incrementIndex(int i) {
-        return (i + 1) % CARDS_TOTAL_COUNT;
+        return (i + 1) % CardUtils.CARDS_TOTAL_COUNT;
     }
 
     private static void game(){
@@ -67,10 +58,10 @@ public class Drunkard {
             count ++;
             int card1 = getCard(0);
             int card2 = getCard(1);
-            System.out.println("Iteration No" + count + " player No1 card: " + toString(card1) +
-                    " player No2 card: " + toString(card2));
-            int ignoreSuitCard1 = card1 % PARS_TOTAL_COUNT;
-            int ignoreSuitCard2 = card2 % PARS_TOTAL_COUNT;
+            System.out.println("Iteration No" + count + " player No1 card: " + CardUtils.toString(card1) +
+                    " player No2 card: " + CardUtils.toString(card2));
+            int ignoreSuitCard1 = card1 % CardUtils.PARS_TOTAL_COUNT;
+            int ignoreSuitCard2 = card2 % CardUtils.PARS_TOTAL_COUNT;
             if(ignoreSuitCard1 == 0 && ignoreSuitCard2 == 8){
                 currentWin(true, card1, card2);
                 continue;
@@ -116,34 +107,5 @@ public class Drunkard {
         addCard(1, card2);
     }
 
-    private static Suit getSuit(int cardNumber) {
-        return Suit.values()[cardNumber / PARS_TOTAL_COUNT];
-    }
 
-    enum Suit {
-        SPADES, // пики
-        HEARTS, // червы
-        CLUBS, // трефы
-        DIAMONDS // бубны
-    }
-
-    enum Par {
-        SIX,
-        SEVEN,
-        EIGHT,
-        NINE,
-        TEN,
-        JACK, // Валет
-        QUEEN, // Дама
-        KING, // Король
-        ACE // Туз
-    }
-
-    private static Par getPar(int cardNumber) {
-        return Par.values()[cardNumber % PARS_TOTAL_COUNT];
-    }
-
-    private static String toString(int cardNumber) {
-        return getPar(cardNumber) + " " + getSuit(cardNumber);
-    }
 }
