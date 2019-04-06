@@ -16,7 +16,7 @@ public class BlackJack {
 
     private static final int MAX_VALUE = 21;
     private static final int MAX_CARDS_COUNT = 8;
-    private static final int MAX_VALUE_FOR_COMP_DECISION = 17;
+    private static final int MAX_VALUE_FOR_COMP_DECISION = 19;
     private static final int BET = 10;
 
     public static void main(String[] args) throws IOException {
@@ -29,7 +29,7 @@ public class BlackJack {
         if (playersMoney[0] > 0)
             log.info("You win! Congratulations!");
         else
-            log.info("You loose. Don't play again...");
+            log.info("You lose. Don't play again...");
     }
 
     private static void initRound() {
@@ -86,7 +86,7 @@ public class BlackJack {
             return;
         }
         if (playerSum < compSum) {
-            log.info("You loose current round! And loose " + BET + "$");
+            log.info("You loose current round! And lost " + BET + "$");
             playersMoney[0] -= BET;
             playersMoney[1] += BET;
             return;
