@@ -7,7 +7,7 @@ public class Slot {
     private static int bet = 10;
     private static final Logger log = org.slf4j.LoggerFactory.getLogger(Slot.class);
 
-    public static void main(String[] args) {
+    public static void main(String... __) {
         int firstCounter = 0;
         int secondCounter = 0;
         int thirdCounter = 0;

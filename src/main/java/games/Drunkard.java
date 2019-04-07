@@ -11,7 +11,7 @@ public class Drunkard {
     private static boolean firstWin;
     private static final Logger log = org.slf4j.LoggerFactory.getLogger(Drunkard.class);
 
-    public static void main(String[] args) {
+    public static void main(String... __) {
         int[] deck = CardUtils.initDeck();
         dealCards(deck);
         game();

@@ -19,7 +19,7 @@ public class BlackJack {
     private static final int MAX_VALUE_FOR_COMP_DECISION = 19;
     private static final int BET = 10;
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String... __) throws IOException {
         while (playersMoney[0] > 0 && playersMoney[1] > 0) {
             initRound();
             playerGetCards(0);
