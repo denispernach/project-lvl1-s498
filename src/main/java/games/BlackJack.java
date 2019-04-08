@@ -33,7 +33,7 @@ public class BlackJack {
     }
 
     private static void initRound() {
-        log.info("\nYou have " + playersMoney[0] + "$, computer have - " + playersMoney[1] + "$. Let's go!");
+        log.info("\nYou have {}$, computer have - {}$. Let's go!",playersMoney[0], playersMoney[1]);
         cards = CardUtils.initDeck();
         playersCards = new int[2][MAX_CARDS_COUNT];
         playersCursors = new int[]{0, 0};
@@ -58,7 +58,7 @@ public class BlackJack {
 
     private static void addCardToPlayerUI(int player) {
         String msg = player == 0 ? "you get - " : "comp get - ";
-        log.info(msg + CardUtils.toString(addCardToPlayer(player)));
+        log.info("{}{}",msg, CardUtils.toString(addCardToPlayer(player)));
     }
 
     private static int addCardToPlayer(int player) {
@@ -77,16 +77,15 @@ public class BlackJack {
     private static void showCurrentResult() {
         int playerSum = getFinalSum(0);
         int compSum = getFinalSum(1);
-        log.info("Your scores equals - " + playerSum +
-                ", comp scores equals - " + compSum);
+        log.info("Your scores equals - {}, comp scores equals - {}",playerSum,compSum);
         if (playerSum > compSum) {
-            log.info("You win current round! And win " + BET + "$");
+            log.info("You win current round! And win {}$", BET);
             playersMoney[0] += BET;
             playersMoney[1] -= BET;
             return;
         }
         if (playerSum < compSum) {
-            log.info("You loose current round! And lost " + BET + "$");
+            log.info("You loose current round! And lost {}$", BET);
             playersMoney[0] -= BET;
             playersMoney[1] += BET;
             return;
@@ -100,7 +99,7 @@ public class BlackJack {
     }
 
     static boolean confirm(String message) throws IOException {
-        log.info(message + " \"Y\" - Yes, {any another key} - no (to stop the game, press Ctrl + C)");
+        log.info("{} \"Y\" - Yes, {any another key} - no (to stop the game, press Ctrl + C)", message);
         switch (Choice.getCharacterFromUser()) {
             case 'Y':
             case 'y':

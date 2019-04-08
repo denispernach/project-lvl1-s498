@@ -57,8 +57,7 @@ public class Drunkard {
             count++;
             int card1 = getCard(0);
             int card2 = getCard(1);
-            log.info("Iteration No" + count + " player No1 card: " + CardUtils.toString(card1) +
-                    " player No2 card: " + CardUtils.toString(card2));
+            log.info("Iteration No{} player No1 card: {}, player No2 card: {}", count, CardUtils.toString(card1), CardUtils.toString(card2));
             int ignoreSuitCard1 = card1 % CardUtils.PARS_TOTAL_COUNT;
             int ignoreSuitCard2 = card2 % CardUtils.PARS_TOTAL_COUNT;
             if (ignoreSuitCard1 == 0 && ignoreSuitCard2 == 8 || (ignoreSuitCard1 > ignoreSuitCard2 && (ignoreSuitCard1 != 8 || ignoreSuitCard2 != 0))) {
