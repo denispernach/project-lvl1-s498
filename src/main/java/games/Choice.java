@@ -11,6 +11,11 @@ public class Choice {
     private static final Logger log = org.slf4j.LoggerFactory.getLogger(Choice.class);
 
     public static void main(String... __) throws IOException {
+        System.out.println("Separator,length = " +LINE_SEPARATOR.length());
+        byte[] input = new byte[1 + LINE_SEPARATOR.length()];
+        System.out.print("Введите число = ");
+        System.in.read(input);
+        System.out.println("Считанный массив = " + Arrays.toString(input));
         log.info("Chose the game please:\n1 - \"Slot\", 2 - \"Drunkard\", 3 - \"BlackJack\"");
         switch (getCharacterFromUser()) {
             case '1': Slot.main(); break;
